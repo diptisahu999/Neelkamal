@@ -76,14 +76,26 @@ class AccountMove(models.Model):
             else:
                 record.amount_total_in_words = ''
 
+class SaleOrder(models.Model):
+    _inherit = 'sale.order'
 
-# class ProductTemplate(models.Model):
-#     _inherit = 'product.template'
-#
-#     l10n_in_hsn_code = fields.Char(
-#         related='product_variant_ids.l10n_in_hsn_code',
-#         string='HSN Code',
-#         readonly=False,
-#         store=True
-#     )
+    # Add this field, copied from your account.move model
+    x_terms_and_conditions = fields.Html(
+        string="Terms and Conditions",
+        default="""
+    <strong>TERMS &amp; CONDITIONS :</strong><br/>
+    (1) PAYMENT TO BE MADE BY PAYEES A/C CHEQUE, DRAFT TO NEFT/RTGS/IMPS ONLY.<br/>
+    (2) KINDLY CHECK THE FABRIC FOR AZO FREE, QUALITY DEFECTS, COLOUR FASTNESS, COLOUR VARIATION BEFORE USING THE FABRICS, WE ARE NOT RESPONSIBLE FOR ANY CLAIMS.<br/>
+    (3) WE ARE NOT RESPONSIBLE FOR ANY LOSS OR DAMAGES DURING TRANSIT. THE GOODS ARE DESPATCHED AT BUYER'S RISK.<br/>
+    (4) ANY COMPLAIN EITHER OF GOODS OR INVOICE MUST BE CLEARED WITHIN TWO DAYS.<br/>
+    (5) THE SALE IS UNDERSTOOD TO HAVE BEEN MADE AFTER DUE CONSIDERATION OF THE QUALITY OF GOODS AND PREVAILING RATES.<br/>
+    (6) INTEREST @2.5% P.M. WILL BE CHARGED AFTER DUE DATE OF BILL.<br/>
+    (7) SUBJECT TO SURAT JURISDICTION.
+    """
+    )
+
+class SaleOrderLine(models.Model):
+    _inherit = 'sale.order.line'
+
+    x_mtr = fields.Float(string="MTR")
 

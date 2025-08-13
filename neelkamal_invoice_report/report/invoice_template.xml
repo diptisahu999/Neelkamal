@@ -1,7 +1,12 @@
 <odoo>
 
   	<template id="external_layout_setneel">
-      <t t-set="company" t-value="env['res.company'].search([('name', '=', 'Neelkamal Industrie')], limit=1)"/>
+    <t t-if="o and 'company_id' in o">
+        <t t-set="company" t-value="o.company_id"/>
+    </t>
+    <t t-if="not o or not 'company_id' in o">
+        <t t-set="company" t-value="res_company"/>
+    </t>
   <div class="header">
    <table style="border: 1pt solid black; width: 100%; font-size: 12px; border-collapse: collapse;height:155px;border-bottom: none;">
     <tr>
