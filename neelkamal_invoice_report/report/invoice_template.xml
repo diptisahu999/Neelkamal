@@ -1,74 +1,55 @@
 <odoo>
 
-  	<template id="external_layout_setneel">
+<template id="external_layout_setneel">
     <t t-if="o and 'company_id' in o">
         <t t-set="company" t-value="o.company_id"/>
     </t>
     <t t-if="not o or not 'company_id' in o">
         <t t-set="company" t-value="res_company"/>
     </t>
-  <div class="header">
-   <table style="border: 1pt solid black; width: 100%; font-size: 12px; border-collapse: collapse;height:155px;border-bottom: none;">
-    <tr>
-        <!-- Logo -->
-    <td width="20%" style="text-align: left; border: none; vertical-align: middle;">
 
-    <!-- Logo ko 5px upar karne ke liye style add kiya gaya hai -->
-    <img t-if="company.logo"
-         t-att-src="image_data_uri(company.logo)"
-         style="max-height: 70px; max-width: 100%; margin-left: 160px; position: relative; bottom: 8px;"
-         alt="Logo"/>
+    <!-- Header Section -->
+    <div class="header">
+        <table style="border: 1pt solid black; width: 100%; font-size: 12px; border-collapse: collapse; height: 155px; border-bottom: none;">
+            <tr>
+                <!-- Logo -->
+                <td width="20%" style="text-align: left; border: none; vertical-align: middle;">
+                    <img t-if="company.logo"
+                         t-att-src="image_data_uri(company.logo)"
+                         style="max-height: 70px; max-width: 100%; margin-left: 160px; position: relative; bottom: 8px;"
+                         alt="Logo"/>
+                </td>
 
-</td>
-        <!-- Company Name Styled Like Image -->
-        <td width="55%" style="text-align: center; vertical-align: middle; border: none; padding-top:30px;">
-<!--            <div>-->
-<!--                <span style="font-weight: bold; font-size: 28px; color: green; text-decoration: underline;  ">-->
-<!--                    NEELKAMAL INDUSTRIES-->
-<!--                </span><br/>-->
-<!--                <span style="font-size: 15px; display: block; margin-top: 12px;">-->
-<!--                   PLOT.NO.A-26/24&#160;&#160;M.G.ROAD NO.12<br/>-->
-<!--                    UDHNA UDHYOG NAGAR SURAT&#160;&#160;Gujarat&#160;&#160;394 210-->
-<!--                </span>-->
+                <!-- Company Name & Address -->
+                <td width="55%" style="text-align: center; vertical-align: middle; border: none; padding-top: 30px;">
+                    <div>
+                        <!-- Company Name -->
+                        <span style="font-weight: bold; font-size: 29px; color: green; text-decoration: underline; margin-right: 240px;">
+                            <span t-field="company.name"/>
+                        </span>
+                        <br/>
 
-<!--            </div>-->
-            <div>
-    <!-- Company Name -->
-
-    <span style="font-weight: bold; font-size: 29px; color: green; text-decoration: underline; margin-right: 240px;">
-        <span t-field="company.name"/>
-    </span><br/>
-
-    <!-- Company Address -->
-    <span style="font-size: 15px; padding-top: 30px;  margin-right: 240px; text-align: left;">
-       <span t-field="company.street" style="font-weight: bold; margin-right: 240px;"/><br/>
-       <span t-if="company.street2" t-field="company.street2"/>
-       <span t-field="company.city"/>&#160;&#160;
-       <span t-field="company.state_id.name"/>&#160;&#160;
-       <span t-field="company.zip"/>
-    </span>
-</div>
-        </td>
-
-        <!-- QR Code + "ORIGINAL" text -->
-<!--        <td width="25%" style="text-align: right; vertical-align: middle; border: none; padding-right: 90px;">-->
-<!--            <span style="font-weight: bold;">ORIGINAL</span><br/>-->
-<!--          <img t-att-src="'/web/image?model=res.company&amp;id=%d&amp;field=custom_qr_code' % company.id" style="height:80px;width:80px;" alt="QR Code"/>-->
-
-<!--        </td>-->
-    </tr>
-</table>
-
-</div>
-
-
-
-    <div class="article o_report_layout_standard">
-        <t t-raw="0" />
+                        <!-- Company Address -->
+                        <span style="font-size: 15px; margin-right: 240px; text-align: left;">
+                            <span t-field="company.street" style="font-weight: bold;"/><br/>
+                            <span t-if="company.street2" t-field="company.street2"/>
+                            <span t-field="company.city"/>&#160;&#160;
+                            <span t-field="company.state_id.name"/>&#160;&#160;
+                            <span t-field="company.zip"/>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
 
-
+    <!-- Content Section -->
+    <div class="article o_report_layout_standard">
+        <t t-raw="0"/>
+    </div>
 </template>
+
+
     <template id="invoice_template_indiamart" name="Custom Invoice Template">
         <!-- <t t-call="web.external_layout"> -->
         <t t-call="neelkamal_invoice_report.external_layout_setneel">
