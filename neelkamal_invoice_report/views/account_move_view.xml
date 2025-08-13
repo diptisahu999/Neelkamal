@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_move_form_inherit_pi_button" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.pi.button</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="%(neelkamal_invoice_report.action_report_neelkamal_invoice_indiamrt)d" 
+                        type="action" 
+                        string="Print PI" 
+                        class="oe_highlight"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
