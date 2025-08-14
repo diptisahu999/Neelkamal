@@ -46,42 +46,7 @@
 
 
         <template id="invoice_template_indiamart" name="Custom Invoice Template">
-                <t t-if="o and 'company_id' in o">
-                    <t t-set="company" t-value="o.company_id"/>
-                </t>
-                <t t-if="not o or not 'company_id' in o">
-                    <t t-set="company" t-value="res_company"/>
-                </t>
 
-                <!-- Header Section -->
-                <div class="header" style="position: relative;">
-                    <table style="border: 1pt solid black; width: 100%; font-size: 12px; border-collapse: collapse; height: 155px; border-bottom: none;">
-                        <tr>
-                            <td width="20%" style="text-align: left; border: none; vertical-align: middle;">
-                                <img t-if="company.logo"
-                                    t-att-src="image_data_uri(company.logo)"
-                                    style="max-height: 70px; max-width: 100%;"
-                                    alt="Logo"/>
-                            </td>
-
-                            <td width="55%" style="text-align: center; vertical-align: middle; border: none; padding-top: 30px;">
-                                <div>
-                                    <span style="font-weight: bold; font-size: 29px; color: green; text-decoration: underline;">
-                                        <span t-field="company.name"/>
-                                    </span>
-                                    <br/>
-                                    <span style="font-size: 15px; text-align: center;">
-                                        <span t-field="company.street" style="font-weight: bold;"/><br/>
-                                        <span t-if="company.street2" t-field="company.street2"/>
-                                        <span t-field="company.city"/>&#160;&#160;
-                                        <span t-field="company.state_id.name"/>&#160;&#160;
-                                        <span t-field="company.zip"/>
-                                    </span>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
             <t t-call="neelkamal_invoice_report.external_layout_setneel">
             <main>
                     <t t-foreach="docs" t-as="o">
