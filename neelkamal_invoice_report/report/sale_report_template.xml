@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_saleorder_document_inherit_neelkamal" inherit_id="sale.report_saleorder_document">
-        
         <xpath expr="/*" position="replace">
-            
             <t t-call="neelkamal_invoice_report.external_layout_setneel">
                 <div class="page" style="font-size: 14px;">
 
@@ -91,9 +89,11 @@
                             <td style="padding: 5px;">
                                 <span t-field="doc.x_terms_and_conditions"/>
                             </td>
-                        </tr>
+                       </tr>
                     </table>
-                    <div style="text-align:right; padding-top:60px; font-weight:bold;">FOR NEELKAMAL INDUSTRIES <br/><br/><br/><br/>PARTNER</div>
+                    
+                    <!-- Updated line to make the company name dynamic -->
+                    <div style="text-align:right; padding-top:60px; font-weight:bold;">FOR <span t-field="doc.company_id.name"/> <br/><br/><br/><br/>PARTNER</div>
                 </div>
             </t>
         </xpath>
