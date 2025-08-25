@@ -8,46 +8,40 @@
                 <t t-set="company" t-value="res_company"/>
             </t>
 
-            <!-- Header Section -->
             <div class="header" style="position: relative;">
-                <table style="border: 1pt solid black; width: 100%; font-size: 12px; border-collapse: collapse; height: 155px; border-bottom: none;">
+                <table style="border: 1pt solid black; width: 100%; font-size: 12px; border-collapse: collapse; border-bottom: none;">
                     <tr>
-                        <td width="20%" style="text-align: left; border: none; vertical-align: middle;">
-                            <img t-if="company.logo"
-                                t-att-src="image_data_uri(company.logo)"
-                                style="max-height: 70px; max-width: 100%;"
-                                alt="Logo"/>
-                        </td>
-                        
-                        <!-- Updated cell to center the content -->
-                        <td width="60%" style="text-align: center; vertical-align: middle; border: none;">
-                            <div>
-                                <span style="font-weight: bold; font-size: 29px; color: green; text-decoration: underline;">
+                        <td colspan="3" style="text-align: center; vertical-align: middle; border: none; padding: 10px;">
+                            <!-- Logo + Company Name inline -->
+                            <div style="display: inline-flex; align-items: center; gap: 8px;">
+                                <img t-if="company.logo"
+                                    t-att-src="image_data_uri(company.logo)"
+                                    style="height: 50px; width: auto;"
+                                    alt="Logo"/>
+                                <span style="font-weight: bold; font-size: 28px; color: green; text-decoration: underline;">
                                     <span t-field="company.name"/>
                                 </span>
-                                <br/>
-                                <span style="font-size: 15px;">
-                                    <span t-field="company.street" style="font-weight: bold;"/><br/>
-                                    <span t-if="company.street2" t-field="company.street2"/>
-                                    <span t-field="company.city"/>&#160;&#160;
-                                    <span t-field="company.state_id.name"/>&#160;&#160;
-                                    <span t-field="company.zip"/>
-                                </span>
                             </div>
-                        </td>
-                        
-                        <!-- Added a spacer cell to push the content to the center -->
-                        <td width="20%" style="text-align: right; border: none; vertical-align: middle;">
+                            <br/>
+                            <!-- Address -->
+                            <div style="font-size: 14px; margin-top: 5px;">
+                                <span t-field="company.street" style="font-weight: bold;"/><br/>
+                                <span t-if="company.street2" t-field="company.street2"/>&#160;
+                                <span t-field="company.city"/>&#160;
+                                <span t-field="company.state_id.name"/>&#160;
+                                <span t-field="company.zip"/>
+                            </div>
                         </td>
                     </tr>
                 </table>
             </div>
 
-            <!-- Content Section -->
             <div class="article o_report_layout_standard">
                 <t t-raw="0"/>
             </div>
         </template>
+
+
 
 
         <template id="invoice_template_indiamart" name="Custom Invoice Template">
