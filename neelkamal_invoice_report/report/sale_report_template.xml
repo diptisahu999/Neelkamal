@@ -73,7 +73,7 @@
                                 <table style="width:100%; border-collapse: collapse;">
                                     <tr><td class="text-right" style="border-top: 1px solid black; padding: 2px 8px;"><span t-esc="subtotal" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></td></tr>
                                     <!-- <tr><td class="text-right" style="padding: 2px 8px;">DISCOUNT 4% <span t-esc="discount_amount" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></td></tr> -->
-                                    <tr><td class="text-right" style="border-top: 1px solid black; padding: 2px 8px;"><span t-esc="amount_after_discount" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></td></tr>
+                                    <!-- <tr><td class="text-right" style="border-top: 1px solid black; padding: 2px 8px;"><span t-esc="amount_after_discount" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></td></tr> -->
                                     <tr><td style="padding: 2px 8px;">CGST:- 0.00</td></tr>
                                     <tr><td style="padding: 2px 8px;">SGST:- 0.00</td></tr>
                                     <tr><td class="text-right" style="padding: 2px 8px;">IGST:- 5 % <span t-esc="igst_amount" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></td></tr>
