@@ -4,9 +4,13 @@
         <xpath expr="/*" position="replace">
             <t t-call="neelkamal_invoice_report.external_layout_setneel">
                 <div class="page" style="font-size: 14px;">
+                     <br/>    
+                     <br/>
+                     <br/>     
+                     <br/>     
 
                     <div style="text-align:center; font-weight:bold; font-size:20px; text-decoration: underline; padding-top:15px; margin-bottom:25px;">
-                        Quotation
+                        Perfoma Invoice 
                     </div>
 
                     <table style="width:100%; border-collapse: collapse;">

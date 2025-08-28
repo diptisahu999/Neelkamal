@@ -11,8 +11,4 @@
           <field name="print_report_name">'Invoice - %s' % (object.name or 'Draft')</field>
           <field name="binding_type">report</field>
       </record>
-
-
-
-
 </odoo>
