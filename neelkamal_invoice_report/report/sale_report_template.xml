@@ -4,31 +4,32 @@
         <xpath expr="/*" position="replace">
             <t t-call="neelkamal_invoice_report.external_layout_setneel">
                 <div class="page" style="font-size: 14px;">
-                     <br/>    
-                     <br/>
-                     <br/>     
-                     <br/>     
+                    <br/><br/><br/><br/>
 
                     <div style="text-align:center; font-weight:bold; font-size:20px; text-decoration: underline; padding-top:15px; margin-bottom:25px;">
-                        Perfoma Invoice 
+                        Perfoma Invoice
                     </div>
 
+                    <!-- Customer & Quotation Info -->
                     <table style="width:100%; border-collapse: collapse;">
                         <tr>
                             <td style="width:60%; vertical-align:top;">
                                 <strong>To:</strong><br/>
                                 <strong><span t-field="doc.partner_id.name"/></strong><br/>
-                                <span t-field="doc.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/><br/>
+                                <span t-field="doc.partner_id"
+                                      t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/><br/>
                                 <strong>Mobile No.:</strong> <span t-field="doc.partner_id.mobile"/><br/>
                                 <strong>GSTIN:</strong> <span t-field="doc.partner_id.vat"/>
                             </td>
                             <td style="width:40%; vertical-align:top; text-align:left;">
                                 <strong>Quotation No.:</strong> <span t-field="doc.name"/><br/>
-                                <strong>Date:</strong> <span t-field="doc.date_order" t-options='{"widget": "date", "format": "dd-MM-yyyy"}'/>
+                                <strong>Date:</strong> <span t-field="doc.date_order"
+                                                            t-options='{"widget": "date", "format": "dd-MM-yyyy"}'/>
                             </td>
                         </tr>
                     </table>
 
+                    <!-- Product Table -->
                     <table class="table table-sm table-bordered" style="margin-top:20px;">
                         <thead style="background-color:#D3D3D3;">
                             <tr>
@@ -46,22 +47,23 @@
                                     <td><span t-field="line.name"/></td>
                                     <td class="text-center"><span t-field="line.product_id.l10n_in_hsn_code"/></td>
                                     <td class="text-center"><span t-field="line.product_uom_qty"/></td>
-                                    <td class="text-center"><span t-field="line.x_mtr" t-options='{"widget": "float", "precision": 2}'/></td>
-                                    <td class="text-right"><span t-field="line.price_unit" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></td>
-                                    <td class="text-right"><span t-field="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></td>
+                                    <td class="text-center">
+                                        <span t-field="line.x_mtr" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-field="line.price_unit"
+                                              t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-field="line.price_subtotal"
+                                              t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                    </td>
                                 </tr>
                             </t>
                         </tbody>
                     </table>
 
-                    <t t-set="subtotal" t-value="doc.amount_untaxed"/>
-                    <t t-set="discount_rate" t-value="0.04"/>
-                    <t t-set="discount_amount" t-value="subtotal * discount_rate"/>
-                    <t t-set="amount_after_discount" t-value="subtotal - discount_amount"/>
-                    <t t-set="igst_rate" t-value="0.05"/>
-                    <t t-set="igst_amount" t-value="amount_after_discount * igst_rate"/>
-                    <t t-set="final_total" t-value="amount_after_discount + igst_amount"/>
-
+                    <!-- Totals & Bank -->
                     <table style="width:100%; margin-top:10px;">
                         <tr>
                             <td style="width:55%; vertical-align:top;">
@@ -75,29 +77,46 @@
                             </td>
                             <td style="width:45%; vertical-align:top;">
                                 <table style="width:100%; border-collapse: collapse;">
-                                    <tr><td class="text-right" style="border-top: 1px solid black; padding: 2px 8px;"><span t-esc="subtotal" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></td></tr>
-                                    <!-- <tr><td class="text-right" style="padding: 2px 8px;">DISCOUNT 4% <span t-esc="discount_amount" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></td></tr> -->
-                                    <!-- <tr><td class="text-right" style="border-top: 1px solid black; padding: 2px 8px;"><span t-esc="amount_after_discount" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></td></tr> -->
-                                    <tr><td style="padding: 2px 8px;">CGST:- 0.00</td></tr>
-                                    <tr><td style="padding: 2px 8px;">SGST:- 0.00</td></tr>
-                                    <tr><td class="text-right" style="padding: 2px 8px;">IGST:- 5 % <span t-esc="igst_amount" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></td></tr>
-                                    <tr><td class="text-right" style="border-top: 1px solid black; font-weight:bold; padding: 2px 8px;">ROUND OFF :- <span t-esc="final_total" t-options='{"widget": "monetary", "display_currency": doc.currency_id, "no_symbol": True}'/></td></tr>
+                                    <tr>
+                                        <td class="text-right" style="border-top: 1px solid black; padding: 2px 8px;">
+                                            <span t-field="doc.amount_untaxed"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right" style="padding: 2px 8px;">
+                                            IGST:- <span t-field="doc.amount_tax"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right"
+                                            style="border-top: 1px solid black; font-weight:bold; padding: 2px 8px;">
+                                            ROUND OFF :- <span t-field="doc.amount_total"/>
+                                        </td>
+                                    </tr>
                                 </table>
                             </td>
                         </tr>
-                        <tr><td colspan="2" style="padding-top:15px;"><strong>RUPEES:</strong> <span t-esc="doc.currency_id.amount_to_text(final_total).upper()"/> ONLY</td></tr>
+                        <tr>
+                            <td colspan="2" style="padding-top:15px;">
+                                <strong>RUPEES:</strong>
+                                <span t-esc="doc.currency_id.amount_to_text(doc.amount_total).upper()"/> ONLY
+                            </td>
+                        </tr>
                     </table>
 
+                    <!-- Terms -->
                     <table style="width: 100%; border: 1px solid black; margin-top: 15px; font-size: 11px; border-collapse: collapse;">
-                       <tr>
+                        <tr>
                             <td style="padding: 5px;">
                                 <span t-field="doc.x_terms_and_conditions"/>
                             </td>
-                       </tr>
+                        </tr>
                     </table>
-                    
-                    <!-- Updated line to make the company name dynamic -->
-                    <div style="text-align:right; padding-top:60px; font-weight:bold;">FOR <span t-field="doc.company_id.name"/> <br/><br/><br/><br/>PARTNER</div>
+
+                    <!-- Signature -->
+                    <div style="text-align:right; padding-top:60px; font-weight:bold;">
+                        FOR <span t-field="doc.company_id.name"/> <br/><br/><br/><br/>PARTNER
+                    </div>
                 </div>
             </t>
         </xpath>
