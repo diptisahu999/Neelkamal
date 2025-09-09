@@ -19,3 +19,4 @@ env/
 # Ignore IDE/editor config
 .idea/
 .vscode/
+*.conf

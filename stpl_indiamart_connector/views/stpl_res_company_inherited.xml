@@ -8,11 +8,11 @@
         <field name="arch" type="xml">
 
             <xpath expr="//form/sheet/notebook/page" position="after">
-                <page string="IndiaMart Configration">
+                <page string="IndiaMart Configuration">
 
                     <div class="o_setting_right_pane">
-                        <field name="is_indiamart" string="IndiaMart Configration"/>
-                        <label string="IndiaMart Configration" for="is_indiamart"/>
+                        <field name="is_indiamart" string="IndiaMart Configuration"/>
+                        <label string="IndiaMart Configuration" for="is_indiamart"/>
                     </div>
                     <button type="object" class="btn-primary" name="crm_indiamart_history_action"
                             invisible="is_indiamart != True">
@@ -38,16 +38,10 @@
         </field>
     </record>
 
-    <data noupdate="1">
-        <record id="stpl_indiamart_base_settings" model="res.config.settings">
-            <field eval="True" name="group_use_lead"/>
-        </record>
-
-        <function model="res.config.settings" name="execute">
-            <value model="res.config.settings"
-                   search="[('id', '=', ref('stpl_indiamart_connector.stpl_indiamart_base_settings'))]"
-            />
-        </function>
-    </data>
+    <!-- ✅ Fixed: use ir.config_parameter instead of res.config.settings -->
+    <record id="stpl_indiamart_enable_leads" model="ir.config_parameter">
+        <field name="key">crm.use_leads</field>
+        <field name="value">True</field>
+    </record>
 
 </odoo>
