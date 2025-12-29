@@ -5,7 +5,7 @@
     'version': '17.0.1.0.0', 
     'summary': 'Customized tax invoice and pro-forma invoice reports for Neelkamal Industries.',
     'category': 'Accounting/Reporting',
-    'author': 'Pratham',
+    'author': 'Diptiranjan',
     'depends': [
         'account',
         'sale_management',
