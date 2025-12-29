@@ -53,6 +53,21 @@ class ResCompany(models.Model):
     last_fetch_update_time = fields.Datetime('Last Fetch Updated Time')
     indiamart_leads_count = fields.Integer('IndiaMart Leads', compute='compute_indiamart_leads_count')
     is_indiamart = fields.Boolean('IndiaMart')
+    strict_range = fields.Boolean(string="Strict Range", default=True)
+    date_range = fields.Selection([
+        ('day', 'Day'),
+        ('month', 'Month'),
+        ('year', 'Year'),
+    ], string="Date Range", default='month')
+    financial_year = fields.Selection([
+        ('to_date', 'To Date'),
+        ('last_year', 'Last Year'),
+    ], string="Financial Year", default='to_date')
+    bucket_1 = fields.Integer(string="Bucket 1", default=30)
+    bucket_2 = fields.Integer(string="Bucket 2", default=60)
+    bucket_3 = fields.Integer(string="Bucket 3", default=90)
+    bucket_4 = fields.Integer(string="Bucket 4", default=120)
+    bucket_5 = fields.Integer(string="Bucket 5", default=180)
 
     _sql_constraints = [
         ('indiamart_mobile_unique', 'unique (indiamart_mobile)', "IndiaMart Mobile already registered.!"),
