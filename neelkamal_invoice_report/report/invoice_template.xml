@@ -2,16 +2,21 @@
 
          <template id="external_layout_setneel">
             <!-- Set company based on record or fallback -->
-            <t t-set="company" t-value="res_company"/>
             <t t-if="o and 'company_id' in o">
                 <t t-set="company" t-value="o.company_id"/>
             </t>
             <t t-elif="doc and 'company_id' in doc">
                 <t t-set="company" t-value="doc.company_id"/>
             </t>
+            <t t-elif="docs and 'company_id' in docs[0]">
+                <t t-set="company" t-value="docs[0].company_id"/>
+            </t>
+            <t t-else="">
+                <t t-set="company" t-value="res_company"/>
+            </t>
 
             <!-- Header -->
-            <div class="header" style="position: relative;">
+            <div class="header">
                 <table style="width: 100%; font-size: 12px; border-collapse: collapse; border-bottom: 2px solid black; border: 1px solid black;">
                     <tr>
                         <!-- Company logo + name -->
