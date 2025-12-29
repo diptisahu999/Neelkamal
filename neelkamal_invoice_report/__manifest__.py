@@ -1,7 +1,7 @@
 # __manifest__.py
 
 {
-    'name': 'Neelkamal Invoice and Report',
+    'name': 'Invoice and Report',
     'version': '1.2', 
     'summary': 'Customized tax invoice and pro-forma invoice reports for Neelkamal Industries.',
     'category': 'Accounting/Reporting',
