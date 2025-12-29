@@ -2,7 +2,9 @@
 <odoo>
     <template id="report_saleorder_document_inherit_neelkamal" inherit_id="sale.report_saleorder_document">
         <xpath expr="/*" position="replace">
-            <t t-call="neelkamal_invoice_report.external_layout_setneel">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="doc" t-value="o"/>
+                <t t-call="neelkamal_invoice_report.external_layout_setneel">
                 <div class="page" style="font-size: 14px;">
                     <br/><br/><br/><br/>
 
@@ -118,6 +120,7 @@
                         FOR <span t-field="doc.company_id.name"/> <br/><br/><br/><br/>PARTNER
                     </div>
                 </div>
+                </t>
             </t>
         </xpath>
     </template>

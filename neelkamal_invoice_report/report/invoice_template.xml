@@ -2,52 +2,51 @@
 
          <template id="external_layout_setneel">
             <!-- Set company based on record or fallback -->
+            <t t-set="company" t-value="res_company"/>
             <t t-if="o and 'company_id' in o">
                 <t t-set="company" t-value="o.company_id"/>
             </t>
-            <t t-if="not o or not 'company_id' in o">
-                <t t-set="company" t-value="res_company"/>
+            <t t-elif="doc and 'company_id' in doc">
+                <t t-set="company" t-value="doc.company_id"/>
             </t>
 
             <!-- Header -->
             <div class="header" style="position: relative;">
-                <table style="width: 100%; font-size: 12px; border-collapse: collapse; border-bottom: none;">
+                <table style="width: 100%; font-size: 12px; border-collapse: collapse; border-bottom: 2px solid black; border: 1px solid black;">
                     <tr>
-                        <!-- Company logo + name + address -->
-                        <td colspan="3" style="text-align: center; vertical-align: middle; padding: 10px; border-right: none;">
-                            <div style="display: inline-flex; align-items: center; gap: 8px;">
+                        <!-- Company logo + name -->
+                        <td style="text-align: center; vertical-align: middle; padding: 10px; width: 80%; border: none;">
+                             <div style="display: block;">
                                 <img t-if="company.logo"
                                     t-att-src="image_data_uri(company.logo)"
-                                    style="height: 100px; width: auto;"
+                                    style="height: 80px; width: auto; vertical-align: middle;"
                                     alt="Logo"/>
-                                    <span style="font-weight: bold; font-size: 32px; color: #F58220; text-decoration: underline;">
-                                        <span t-field="company.name"/>
-                                    </span>
-                            </div>
-                            <div style="font-size: 14px; margin-top: 5px;">
+                                <span style="font-weight: bold; font-size: 32px; color: #F58220; text-decoration: underline; vertical-align: middle; margin-left: 10px;">
+                                    <span t-field="company.name"/>
+                                </span>
+                             </div>
+                             
+                            <div style="font-size: 14px; margin-top: 5px; text-align: center;">
                                 <span t-field="company.street" style="font-weight: bold;"/><br/>
                                 <span t-if="company.street2" t-field="company.street2"/>&#160;
                                 <span t-field="company.city"/>&#160;
                                 <span t-field="company.state_id.name"/>&#160;
                                 <span t-field="company.zip"/>
                                 <br/>
-                                    <t t-if="company.phone">
-                                        <span>Mobile : <t t-esc="company.mobile"/></span>
-                                        <span>Tel. : <t t-esc="company.phone"/></span>
-                                        <br/>
-                                        <span>GST No : <t t-esc="company.vat"/></span>
-
-                                    </t>
+                                <span>
+                                    <t t-if="company.mobile">Mobile : <span t-field="company.mobile"/> </t>
+                                    <t t-if="company.phone">Tel. : <span t-field="company.phone"/></t>
+                                </span>
+                                <br/>
+                                <span style="font-weight: bold;">GST No : <t t-out="company.vat or '24AAPFN2619D1ZF'"/></span>
                             </div>
-                            <br/>
-                            
                         </td>
 
                         <!-- Original + barcode -->
-                        <td style="border-collapse: collapse; border: none; text-align: center; vertical-align: middle;">
-                            <div style="font-size: 14px; font-weight: bold; color: black;">ORIGINAL</div>
+                        <td style="border-left: 1px solid black; text-align: center; vertical-align: middle; width: 20%; border: none;">
+                            <div style="font-size: 14px; font-weight: bold; color: black; border-bottom: 1px solid black; padding: 5px;">ORIGINAL</div>
                             <img src="/neelkamal_invoice_report/static/src/img/barcode.png"
-                                style="height: 90px; margin-top: 5px;"
+                                style="height: 90px; width: 90px; margin-top: 5px;"
                                 alt="QR Code"/>
                         </td>
                     </tr>
@@ -56,7 +55,7 @@
 
             <!-- Report body -->
             <div class="article o_report_layout_standard">
-                <t t-raw="0"/>
+                <t t-out="0"/>
             </div>
         </template>
 
@@ -65,10 +64,9 @@
 
 
         <template id="invoice_template_indiamart" name="Custom Invoice Template">
-
-            <t t-call="neelkamal_invoice_report.external_layout_setneel">
-            <main>
-                    <t t-foreach="docs" t-as="o">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="neelkamal_invoice_report.external_layout_setneel">
+                    <main>
 
 
                     <table style="width:100%; border:1px solid black; border-collapse:collapse; font-size:12px; margin-bottom:0px; padding:0px;">
@@ -103,7 +101,7 @@
                                         <t t-if="o.company_id.mobile and o.company_id.phone"><t t-raw="'&#160;&#160;'"/></t>
                                         <span t-if="o.company_id.phone" t-field="o.company_id.phone"/>
                                         <t t-if="not o.company_id.mobile and not o.company_id.phone">
-                                            98251 26642<t t-raw="'&#160;&#160;'"/>
+                                            98251 26642<t t-out="'&#160;&#160;'"/>
                                         </t>
                                     </div>
                                     <div>
@@ -380,10 +378,8 @@
 
 
 
-                        </t>
-
-            </main>
-            <!-- </t> -->
+                    </main>
+                </t>
             </t>
         </template>
 
